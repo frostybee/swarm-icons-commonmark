@@ -1,0 +1,41 @@
+{
+    "name": "frostybee/swarm-icons-commonmark",
+    "description": "CommonMark extension for rendering inline SVG icons with Swarm Icons",
+    "type": "library",
+    "license": "MIT",
+    "keywords": ["icons", "svg", "commonmark", "markdown", "inline-icons"],
+    "homepage": "https://github.com/swarm-icons/swarm-icons-commonmark",
+    "require": {
+        "php": "^8.2",
+        "frostybee/swarm-icons": "^1.0",
+        "league/commonmark": "^2.0"
+    },
+    "require-dev": {
+        "friendsofphp/php-cs-fixer": "^3.64",
+        "phpstan/phpstan": "^1.10",
+        "phpstan/phpstan-strict-rules": "^1.5",
+        "phpunit/phpunit": "^10.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "Frostybee\\SwarmIcons\\CommonMark\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Frostybee\\SwarmIcons\\CommonMark\\Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "test": "phpunit",
+        "phpstan": "phpstan analyse --memory-limit=512M",
+        "cs-check": "vendor/bin/php-cs-fixer fix --dry-run --diff",
+        "cs-fix": "vendor/bin/php-cs-fixer fix",
+        "test-all": [
+            "@phpstan",
+            "@cs-check",
+            "@test"
+        ]
+    },
+    "minimum-stability": "stable"
+}
