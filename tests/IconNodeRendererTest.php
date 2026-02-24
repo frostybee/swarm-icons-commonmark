@@ -34,7 +34,7 @@ class IconNodeRendererTest extends TestCase
     {
         $html = $this->convert(':icon[test:home class="w-6 h-6"]');
 
-        $this->assertStringContainsString('w-6 h-6', $html);
+        $this->assertStringContainsString('class="w-6 h-6"', $html);
     }
 
     public function test_throws_on_missing_icon_when_not_silent(): void
@@ -57,6 +57,7 @@ class IconNodeRendererTest extends TestCase
         $html = $this->convert(':icon[test:<script>alert(1)</script>]', silentOnMissing: true);
 
         $this->assertStringNotContainsString('<script>', $html);
+        $this->assertStringContainsString('&lt;script&gt;', $html);
     }
 
     public function test_renders_icon_within_paragraph(): void
@@ -67,7 +68,7 @@ class IconNodeRendererTest extends TestCase
         $this->assertStringContainsString('<svg', $html);
     }
 
-    private function convert(string $markdown, bool $silentOnMissing = true): string
+    private function convert(string $markdown, bool $silentOnMissing = false): string
     {
         $manager = new IconManager();
         $manager->register('test', new DirectoryProvider($this->fixturesPath));

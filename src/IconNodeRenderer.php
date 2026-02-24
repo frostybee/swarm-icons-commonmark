@@ -4,8 +4,7 @@ declare(strict_types=1);
 
 namespace Frostybee\SwarmIcons\CommonMark;
 
-use Frostybee\SwarmIcons\Exception\IconNotFoundException;
-use Frostybee\SwarmIcons\Exception\InvalidIconNameException;
+use Frostybee\SwarmIcons\Exception\SwarmIconsException;
 use Frostybee\SwarmIcons\IconManager;
 use League\CommonMark\Node\Node;
 use League\CommonMark\Renderer\ChildNodeRendererInterface;
@@ -28,10 +27,10 @@ final class IconNodeRenderer implements NodeRendererInterface
 
         try {
             return $this->manager->get($name, $attributes)->toHtml();
-        } catch (IconNotFoundException | InvalidIconNameException $e) {
+        } catch (SwarmIconsException $e) {
             if ($this->silentOnMissing) {
-                $safeName = htmlspecialchars($name, ENT_QUOTES, 'UTF-8');
-                $safeError = htmlspecialchars($e->getMessage(), ENT_QUOTES, 'UTF-8');
+                $safeName = str_replace('--', '- -', htmlspecialchars($name, ENT_QUOTES, 'UTF-8'));
+                $safeError = str_replace('--', '- -', htmlspecialchars($e->getMessage(), ENT_QUOTES, 'UTF-8'));
 
                 return "<!-- SwarmIcons: Icon '{$safeName}' not found ({$safeError}) -->";
             }

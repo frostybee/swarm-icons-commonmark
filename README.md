@@ -12,7 +12,9 @@ This will pull in `frostybee/swarm-icons` and `league/commonmark` automatically.
 
 ## Usage
 
-Register the extension with the CommonMark environment:
+### With Local SVG Files
+
+Register a `DirectoryProvider` pointing to a local directory of SVG files:
 
 ```php
 use Frostybee\SwarmIcons\CommonMark\IconExtension;
@@ -31,6 +33,32 @@ $environment->addExtension(new IconExtension($manager));
 
 $converter = new MarkdownConverter($environment);
 ```
+
+### With the Iconify API
+
+Use `IconifyProvider` to fetch icons on demand from the [Iconify API](https://iconify.design/) (200,000+ icons, no downloads required):
+
+```php
+use Frostybee\SwarmIcons\CommonMark\IconExtension;
+use Frostybee\SwarmIcons\IconManager;
+use Frostybee\SwarmIcons\Cache\FileCache;
+use Frostybee\SwarmIcons\Provider\IconifyProvider;
+use League\CommonMark\Environment\Environment;
+use League\CommonMark\Extension\CommonMark\CommonMarkCoreExtension;
+use League\CommonMark\MarkdownConverter;
+
+$manager = new IconManager();
+$cache = new FileCache('/path/to/cache');
+$manager->register('tabler', new IconifyProvider('tabler', $cache));
+
+$environment = new Environment();
+$environment->addExtension(new CommonMarkCoreExtension());
+$environment->addExtension(new IconExtension($manager));
+
+$converter = new MarkdownConverter($environment);
+```
+
+Any [Iconify prefix](https://icon-sets.iconify.design/) works: `tabler`, `heroicons`, `lucide`, `mdi`, etc.
 
 Then use the `:icon[]` syntax in your markdown:
 

@@ -17,17 +17,16 @@ final class IconParser implements InlineParserInterface
 
     public function parse(InlineParserContext $inlineContext): bool
     {
-        $cursor = $inlineContext->getCursor();
         $matches = $inlineContext->getMatches();
-
-        // Advance cursor past the full match
-        $cursor->advanceBy($inlineContext->getFullMatchLength());
-
         $content = trim($matches[1] ?? '');
 
         if ($content === '') {
             return false;
         }
+
+        // Advance cursor past the full match only after validation
+        $cursor = $inlineContext->getCursor();
+        $cursor->advanceBy($inlineContext->getFullMatchLength());
 
         // Split on first space: icon name + optional attribute string
         $parts = preg_split('/\s+/', $content, 2);

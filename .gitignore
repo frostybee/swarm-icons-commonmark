@@ -1,39 +1,13 @@
-icons-lib/
-profile/
-
 cache/
-
-env.php
-config/env.php
-# Documentation files to exclude from version control
-# docs/Custom_404_page_implementation.md
 
 # Composer and dependencies
 vendor/
 build/
 node_modules/
 
-
 # VisualStudioCode
-# Local History for Visual Studio Code
 .history/
 *.code-workspace
-#.vscode
-
-# Directories holding app-generated files.
-# Keep the logs/ directory
-!var/logs/
-var/logs/*
-!var/logs/.htaccess
-# Keep the tmp/ directory
-!var/tmp/
-var/tmp/*
-!var/tmp/.htaccess
-
-# Keep the cache/ directory
-!cache/tmp/
-cache/tmp/*
-!cache/tmp/.htaccess
 
 # Claude Code
 .claude/
@@ -75,9 +49,3 @@ ehthumbs_vista.db
 $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
-
-app/Controllers/TestController.php
-app/Domain/Models/TestModel.php
-app/Views/testView.php
-docs/FileUploadHelper.php
-
