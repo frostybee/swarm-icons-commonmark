@@ -12,20 +12,25 @@ This will pull in `frostybee/swarm-icons` and `league/commonmark` automatically.
 
 ## Usage
 
-### With Local SVG Files
+### With JSON Collections (Recommended)
 
-Register a `DirectoryProvider` pointing to a local directory of SVG files:
+Download icon sets via the Swarm Icons CLI, then use `SwarmIconsConfig` to auto-discover them:
+
+```bash
+php vendor/bin/swarm-icons json:download tabler heroicons mdi
+```
 
 ```php
 use Frostybee\SwarmIcons\CommonMark\IconExtension;
-use Frostybee\SwarmIcons\IconManager;
-use Frostybee\SwarmIcons\Provider\DirectoryProvider;
+use Frostybee\SwarmIcons\SwarmIconsConfig;
 use League\CommonMark\Environment\Environment;
 use League\CommonMark\Extension\CommonMark\CommonMarkCoreExtension;
 use League\CommonMark\MarkdownConverter;
 
-$manager = new IconManager();
-$manager->register('tabler', new DirectoryProvider('/path/to/tabler/svgs'));
+$manager = SwarmIconsConfig::create()
+    ->discoverJsonSets()
+    ->cachePath('/path/to/cache')
+    ->build();
 
 $environment = new Environment();
 $environment->addExtension(new CommonMarkCoreExtension());
@@ -34,28 +39,25 @@ $environment->addExtension(new IconExtension($manager));
 $converter = new MarkdownConverter($environment);
 ```
 
-### With the Iconify API
+### With Local SVG Files
 
-Use `IconifyProvider` to fetch icons on demand from the [Iconify API](https://iconify.design/) (200,000+ icons, no downloads required):
+Register a local directory of SVG files:
 
 ```php
-use Frostybee\SwarmIcons\CommonMark\IconExtension;
-use Frostybee\SwarmIcons\IconManager;
-use Frostybee\SwarmIcons\Cache\FileCache;
-use Frostybee\SwarmIcons\Provider\IconifyProvider;
-use League\CommonMark\Environment\Environment;
-use League\CommonMark\Extension\CommonMark\CommonMarkCoreExtension;
-use League\CommonMark\MarkdownConverter;
+$manager = SwarmIconsConfig::create()
+    ->addDirectory('custom', '/path/to/svgs')
+    ->build();
+```
 
-$manager = new IconManager();
-$cache = new FileCache('/path/to/cache');
-$manager->register('tabler', new IconifyProvider('tabler', $cache));
+### With the Iconify API
 
-$environment = new Environment();
-$environment->addExtension(new CommonMarkCoreExtension());
-$environment->addExtension(new IconExtension($manager));
+Fetch icons on demand from the [Iconify API](https://iconify.design/) (200,000+ icons, no downloads required):
 
-$converter = new MarkdownConverter($environment);
+```php
+$manager = SwarmIconsConfig::create()
+    ->addIconifySet('heroicons')
+    ->cachePath('/path/to/cache')
+    ->build();
 ```
 
 Any [Iconify prefix](https://icon-sets.iconify.design/) works: `tabler`, `heroicons`, `lucide`, `mdi`, etc.
@@ -78,6 +80,30 @@ Pass HTML attributes directly in the syntax:
 :icon[tabler:home class="w-6 h-6"]
 :icon[tabler:home class="text-blue-500" id="home-icon"]
 ```
+
+### Transforms
+
+Rotate, flip, and adjust opacity using built-in attributes that map to the `Icon` fluent API:
+
+```markdown
+:icon[tabler:arrow-up rotate="90"]
+:icon[tabler:arrow-right flip="horizontal"]
+:icon[tabler:star opacity="0.5"]
+:icon[tabler:info-circle title="More info"]
+```
+
+Combine transforms with regular attributes:
+
+```markdown
+:icon[tabler:home class="w-6 text-blue-500" rotate="180" opacity="0.8" title="Home"]
+```
+
+| Attribute | Description                      | Values                                   |
+| --------- | -------------------------------- | ---------------------------------------- |
+| `rotate`  | Rotate the icon                  | Degrees (e.g., `"90"`, `"180"`, `"270"`) |
+| `flip`    | Flip the icon                    | `"horizontal"`, `"vertical"`, `"both"`   |
+| `opacity` | Set icon opacity                 | `"0.0"` to `"1.0"` (e.g., `"0.5"`)      |
+| `title`   | Add accessible `<title>` element | Any text (e.g., `"Home icon"`)           |
 
 ### Silent Mode
 

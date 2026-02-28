@@ -37,5 +37,12 @@
             "@test"
         ]
     },
-    "minimum-stability": "stable"
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "repositories": [
+        {
+            "type": "path",
+            "url": "../swarm-icons"
+        }
+    ]
 }

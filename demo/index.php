@@ -45,6 +45,22 @@ An icon with multiple attributes: :icon[tabler:settings class="icon-spin text-or
 
 :icon[tabler:brand-github class="text-gray"] GitHub · :icon[tabler:brand-twitter class="text-sky"] Twitter · :icon[tabler:brand-linkedin class="text-indigo"] LinkedIn
 
+## :icon[tabler:rotate] Transforms
+
+Rotated icon: :icon[tabler:arrow-up rotate="90" class="text-blue"] :icon[tabler:arrow-up rotate="180" class="text-green"] :icon[tabler:arrow-up rotate="270" class="text-red"]
+
+Flipped icon: :icon[tabler:arrow-right class="text-purple"] → :icon[tabler:arrow-right flip="horizontal" class="text-purple"]
+
+## :icon[tabler:eye] Opacity & Title
+
+Fading icons: :icon[tabler:star class="text-amber"] :icon[tabler:star class="text-amber" opacity="0.7"] :icon[tabler:star class="text-amber" opacity="0.4"] :icon[tabler:star class="text-amber" opacity="0.1"]
+
+Icon with title (hover me): :icon[tabler:info-circle class="text-blue" title="This is a tooltip"]
+
+## :icon[tabler:layers-intersect] Combined
+
+All transforms at once: :icon[tabler:home class="icon-lg text-indigo" rotate="45" opacity="0.8" title="Tilted home icon"]
+
 ## :icon[tabler:alert-triangle class="text-red"] Missing Icon (Silent Mode)
 
 This icon does not exist: :icon[tabler:nonexistent-icon-xyz] - silent mode renders an HTML comment instead of throwing.

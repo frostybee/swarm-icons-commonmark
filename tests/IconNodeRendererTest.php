@@ -68,6 +68,45 @@ class IconNodeRendererTest extends TestCase
         $this->assertStringContainsString('<svg', $html);
     }
 
+    public function test_renders_icon_with_rotate(): void
+    {
+        $html = $this->convert(':icon[test:home rotate="90"]');
+
+        $this->assertStringContainsString('transform: rotate(90deg)', $html);
+        $this->assertStringContainsString('<svg', $html);
+    }
+
+    public function test_renders_icon_with_flip(): void
+    {
+        $html = $this->convert(':icon[test:home flip="horizontal"]');
+
+        $this->assertStringContainsString('scaleX(-1)', $html);
+        $this->assertStringContainsString('<svg', $html);
+    }
+
+    public function test_renders_icon_with_opacity(): void
+    {
+        $html = $this->convert(':icon[test:home opacity="0.5"]');
+
+        $this->assertStringContainsString('opacity="0.5"', $html);
+    }
+
+    public function test_renders_icon_with_title(): void
+    {
+        $html = $this->convert(':icon[test:home title="Home icon"]');
+
+        $this->assertStringContainsString('<title>Home icon</title>', $html);
+    }
+
+    public function test_renders_icon_with_mixed_transforms_and_attributes(): void
+    {
+        $html = $this->convert(':icon[test:home class="w-6" rotate="180" opacity="0.8"]');
+
+        $this->assertStringContainsString('class="w-6"', $html);
+        $this->assertStringContainsString('transform: rotate(180deg)', $html);
+        $this->assertStringContainsString('opacity="0.8"', $html);
+    }
+
     private function convert(string $markdown, bool $silentOnMissing = false): string
     {
         $manager = new IconManager();
