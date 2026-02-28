@@ -1,6 +1,6 @@
 # swarm-icons-commonmark
 
-CommonMark extension for the [frostybee/swarm-icons](https://github.com/swarm-icons/swarm-icons) PHP library. Renders inline SVG icons in markdown using the `:icon[prefix:name]` syntax — no JavaScript, no font files, just SVG markup in your HTML output.
+CommonMark extension for the [frostybee/swarm-icons](https://frostybee.github.io/swarm-icons/) PHP library. Renders inline SVG icons in markdown using the `:icon[prefix:name]` syntax — no JavaScript, no font files, just SVG markup in your HTML output.
 
 ## Installation
 
@@ -11,6 +11,8 @@ composer require frostybee/swarm-icons-commonmark
 This will pull in `frostybee/swarm-icons` and `league/commonmark` automatically.
 
 ## Usage
+
+The examples below show common configurations. For the full `swarm-icons` configuration reference (all providers, caching options, CLI commands, etc.), see the [Swarm Icons documentation](https://frostybee.github.io/swarm-icons/).
 
 ### With JSON Collections (Recommended)
 
@@ -133,4 +135,6 @@ composer install
 
 ## License
 
-MIT
+This project is licensed under the [MIT License](https://opensource.org/licenses/MIT).
+
+Copyright (c) frostybee. See [composer.json](composer.json) for details.

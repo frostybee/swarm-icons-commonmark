@@ -4,7 +4,7 @@
     "type": "library",
     "license": "MIT",
     "keywords": ["icons", "svg", "commonmark", "markdown", "inline-icons"],
-    "homepage": "https://github.com/swarm-icons/swarm-icons-commonmark",
+    "homepage": "https://github.com/frostybee/swarm-icons-commonmark",
     "require": {
         "php": "^8.2",
         "frostybee/swarm-icons": "^1.0",
