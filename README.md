@@ -16,7 +16,7 @@ The examples below show common configurations. For the full `swarm-icons` config
 
 ### With JSON Collections (Recommended)
 
-Download icon sets via the Swarm Icons CLI, then use `SwarmIconsConfig` to auto-discover them:
+Download icon sets via the [Swarm Icons CLI](https://frostybee.github.io/swarm-icons/cli/overview/), then use `SwarmIconsConfig` to auto-discover them:
 
 ```bash
 php vendor/bin/swarm-icons json:download tabler heroicons mdi

@@ -37,12 +37,10 @@
             "@test"
         ]
     },
-    "minimum-stability": "dev",
-    "prefer-stable": true,
-    "repositories": [
+    "authors": [
         {
-            "type": "path",
-            "url": "../swarm-icons"
+            "name": "frostybee",
+            "homepage": "https://github.com/frostybee"
         }
     ]
 }
